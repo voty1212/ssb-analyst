@@ -1,0 +1,11 @@
+.main-content {
+  flex: 1;
+  padding: 24px;
+  background-color: var(--color-cream);
+}
+
+.main-content__placeholder {
+  margin: 0;
+  font-family: var(--font-body);
+  color: #8a8478;
+}
