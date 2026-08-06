@@ -1,0 +1,20 @@
+.sidebar {
+  width: 220px;
+  background-color: var(--color-white);
+  border-right: 1px solid var(--color-border);
+  padding: 16px;
+}
+
+.sidebar__heading {
+  margin: 0 0 12px;
+  font-family: var(--font-heading);
+  font-size: 16px;
+  color: var(--color-olive);
+}
+
+.sidebar__empty {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: #8a8478;
+}

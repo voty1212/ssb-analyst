@@ -1,0 +1,19 @@
+.app-header {
+  background-color: var(--color-olive);
+  border-bottom: 3px solid var(--color-gold);
+  padding: 16px 24px;
+}
+
+.app-header__title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 26px;
+  color: var(--color-cream);
+}
+
+.app-header__tagline {
+  margin: 4px 0 0;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--color-gold);
+}
