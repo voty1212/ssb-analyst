@@ -1,0 +1,72 @@
+.upload-screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px;
+}
+
+.upload-screen__zone {
+  width: 100%;
+  max-width: 480px;
+  border: 2px dashed var(--color-border);
+  border-radius: 8px;
+  padding: 48px 24px;
+  text-align: center;
+  cursor: pointer;
+  background-color: var(--color-white);
+}
+
+.upload-screen__zone--dragging {
+  border-color: var(--color-gold);
+  background-color: rgba(200, 168, 75, 0.08);
+}
+
+.upload-screen__prompt {
+  margin: 0 0 8px;
+  font-family: var(--font-heading);
+  font-size: 18px;
+  color: var(--color-olive);
+}
+
+.upload-screen__hint {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: #8a8478;
+}
+
+.upload-screen__input {
+  display: none;
+}
+
+.upload-screen__selected {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.upload-screen__submit {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-cream);
+  background-color: var(--color-olive);
+  border: none;
+  border-radius: 4px;
+  padding: 8px 20px;
+  cursor: pointer;
+}
+
+.upload-screen__submit:hover:not(:disabled) {
+  background-color: var(--color-red);
+}
+
+.upload-screen__submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
