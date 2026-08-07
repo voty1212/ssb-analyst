@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import './Sidebar.css'
 
 const papers = [
@@ -6,6 +7,8 @@ const papers = [
 ]
 
 function Sidebar() {
+  const [selectedId, setSelectedId] = useState(null)
+
   return (
     <aside className="sidebar">
       <h2 className="sidebar__heading">Select Brand of NewsPaper</h2>
@@ -14,7 +17,15 @@ function Sidebar() {
       ) : (
         <ul className="sidebar__list">
           {papers.map((paper) => (
-            <li key={paper.id} className="sidebar__item">
+            <li
+              key={paper.id}
+              className={
+                paper.id === selectedId
+                  ? 'sidebar__item sidebar__item--selected'
+                  : 'sidebar__item'
+              }
+              onClick={() => setSelectedId(paper.id)}
+            >
               {paper.name}
             </li>
           ))}

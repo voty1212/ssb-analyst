@@ -40,3 +40,9 @@
 .sidebar__item:hover {
   border-color: var(--color-gold);
 }
+
+.sidebar__item--selected {
+  background-color: var(--color-olive);
+  border-color: var(--color-gold);
+  color: var(--color-cream);
+}
