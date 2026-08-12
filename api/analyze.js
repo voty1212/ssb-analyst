@@ -1,8 +1,5 @@
-import Anthropic from '@anthropic-ai/sdk'
-
-// Swap to 'claude-sonnet-5' for the newer, cheaper Sonnet if you want it.
-const MODEL = 'claude-sonnet-4-6'
-const MAX_TOKENS = 8000
+import { getProvider } from './providers/index.js'
+import { ProviderError } from './providers/ProviderError.js'
 
 function buildSystemPrompt(paperName, language) {
   let languageInstruction = 'Respond in English.'
@@ -31,38 +28,9 @@ Prioritise defence, geopolitics, national security, science & tech, governance, 
 Stay factual and balanced; present multiple sides on contested issues. Note where an opinion piece reflects the paper's editorial slant rather than settled fact.`
 }
 
-function buildAnthropicMessages(messages, fileBase64, fileMediaType) {
-  return messages.map((msg, index) => {
-    if (index === 0 && fileBase64) {
-      const isPdf = fileMediaType === 'application/pdf'
-      return {
-        role: msg.role,
-        content: [
-          {
-            type: isPdf ? 'document' : 'image',
-            source: {
-              type: 'base64',
-              media_type: fileMediaType,
-              data: fileBase64,
-            },
-          },
-          { type: 'text', text: msg.content },
-        ],
-      }
-    }
-    return { role: msg.role, content: msg.content }
-  })
-}
-
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'Method not allowed' })
-    return
-  }
-
-  const apiKey = process.env.ANTHROPIC_API_KEY
-  if (!apiKey) {
-    res.status(500).json({ error: 'ANTHROPIC_API_KEY is not configured on the server.' })
     return
   }
 
@@ -74,23 +42,19 @@ export default async function handler(req, res) {
   }
 
   try {
-    const client = new Anthropic({ apiKey })
-
-    const response = await client.messages.create({
-      model: MODEL,
-      max_tokens: MAX_TOKENS,
-      system: buildSystemPrompt(paperName, language),
-      messages: buildAnthropicMessages(messages, fileBase64, fileMediaType),
+    const callProvider = getProvider()
+    const reply = await callProvider({
+      systemPrompt: buildSystemPrompt(paperName, language),
+      messages,
+      fileBase64,
+      fileMediaType,
     })
-
-    const reply = response.content
-      .filter((block) => block.type === 'text')
-      .map((block) => block.text)
-      .join('\n')
-
     res.status(200).json({ reply })
   } catch (err) {
-    const status = err.status || 500
-    res.status(status).json({ error: err.message || 'Failed to analyze the paper.' })
+    if (err instanceof ProviderError) {
+      res.status(err.status).json({ error: err.message })
+      return
+    }
+    res.status(500).json({ error: err.message || 'Failed to analyze the paper.' })
   }
 }
