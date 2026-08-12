@@ -4,6 +4,11 @@
   padding: 16px 24px;
 }
 
+.app-header__link {
+  display: block;
+  text-decoration: none;
+}
+
 .app-header__title {
   margin: 0;
   font-family: var(--font-heading);

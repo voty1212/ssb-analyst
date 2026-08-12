@@ -1,17 +1,15 @@
-const STORAGE_KEY = 'ssb-analyst-papers'
-
-export function loadPapers() {
+export function loadSessions(storageKey) {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY)
+    const raw = localStorage.getItem(storageKey)
     return raw ? JSON.parse(raw) : []
   } catch {
     return []
   }
 }
 
-export function savePapers(papers) {
+export function saveSessions(storageKey, sessions) {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(papers))
+    localStorage.setItem(storageKey, JSON.stringify(sessions))
     return true
   } catch {
     return false

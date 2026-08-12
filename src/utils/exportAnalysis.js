@@ -1,9 +1,8 @@
-export function exportAnalysisAsText(paper) {
+export function exportAnalysisAsText(session) {
   const lines = [
-    `${paper.paperName} - ${new Date(paper.date).toLocaleDateString()}`,
-    `Language: ${paper.language}`,
+    `${session.title} - ${new Date(session.date).toLocaleDateString()}`,
     '',
-    ...paper.messages.map(
+    ...session.messages.map(
       (m) => `${m.role === 'user' ? 'You' : 'Analyst'}:\n${m.content}\n`,
     ),
   ]
@@ -12,7 +11,7 @@ export function exportAnalysisAsText(paper) {
   const url = URL.createObjectURL(blob)
   const a = document.createElement('a')
   a.href = url
-  a.download = `${paper.paperName.replace(/\s+/g, '-')}-${paper.date.slice(0, 10)}.txt`
+  a.download = `${session.title.replace(/\s+/g, '-')}-${session.date.slice(0, 10)}.txt`
   a.click()
   URL.revokeObjectURL(url)
 }

@@ -1,0 +1,33 @@
+.tool-sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  background-color: var(--color-white);
+  border-right: 1px solid var(--color-border);
+  padding: 16px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.tool-sidebar__new-btn {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-white);
+  background-color: var(--color-olive);
+  border: none;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+
+.tool-sidebar__new-btn:hover {
+  background-color: var(--color-red);
+}
+
+.tool-sidebar__divider {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: 16px 0;
+}
