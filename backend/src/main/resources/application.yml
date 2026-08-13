@@ -1,0 +1,12 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/ssb_analyst}
+    username: ${SPRING_DATASOURCE_USERNAME:ssb_analyst}
+    password: ${SPRING_DATASOURCE_PASSWORD:ssb_analyst}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
